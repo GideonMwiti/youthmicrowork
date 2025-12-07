@@ -3,6 +3,7 @@ from django.urls import path
 from core import views
 
 urlpatterns = [
+   
     path("admin/", admin.site.urls),
 
     path("", views.home, name="home"),
@@ -17,8 +18,8 @@ urlpatterns = [
 
     path("dashboard/", views.user_dashboard, name="dashboard"),
     path("admin-dashboard/", views.admin_dashboard, name="admin_dashboard"),
-
-    path("admin/manage-users/", views.manage_users, name="manage_users"),
-    path("admin/reports/", views.reports, name="reports"),
-    path("admin/settings/", views.admin_settings, name="admin_settings"),
+    
+    path("manage-users/", views.manage_users, name="manage_users"),
+    path("reports/", views.reports, name="reports"),
+    path("admin-settings/", views.admin_settings, name="admin_settings"),
 ]

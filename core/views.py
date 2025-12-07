@@ -7,41 +7,24 @@ from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 
-
-# -----------------------------
-# HOME PAGE
-# -----------------------------
 def home(request):
     return render(request, "home.html")
 
-
-# -----------------------------
-# TASKS PAGE
-# -----------------------------
 def tasks(request):
     task_list = ["Data Entry", "Surveys", "AI Training", "Research", "Content Writing", "Image Annotation"]
     return render(request, "tasks.html", {"task_list": task_list})
 
-
-# -----------------------------
-# TRAINING PAGE
-# -----------------------------
 def training(request):
     return render(request, "training.html")
 
-
-# -----------------------------
-# USER REGISTRATION
-# -----------------------------
 def register(request):
     if request.method == "POST":
         full_name = request.POST.get("full_name")
         email = request.POST.get("email")
         password1 = request.POST.get("password1")
         password2 = request.POST.get("password2")
-        role = request.POST.get("role", "microworker")  # Default to microworker if not provided
+        role = request.POST.get("role", "microworker")  
 
-        # Validation
         if not full_name or not email or not password1:
             messages.error(request, "Please fill in all required fields.")
             return redirect("register")
@@ -59,15 +42,14 @@ def register(request):
             return redirect("register")
 
         try:
-            # Create user with email as username
+            
             user = User.objects.create_user(
                 username=email,
                 email=email,
                 password=password1,
-                first_name=full_name  # Store full name in first_name field
+                first_name=full_name  
             )
             
-            # Set role (staff status for admin)
             if role == "admin":
                 user.is_staff = True
                 user.save()
@@ -83,33 +65,27 @@ def register(request):
 
     return render(request, "register.html")
 
-
-# -----------------------------
-# LOGIN - FIXED VERSION
-# -----------------------------
 def login_view(request):
-    # If user is already authenticated, redirect to appropriate dashboard
+   
     if request.user.is_authenticated:
         if request.user.is_staff:
             return redirect("admin_dashboard")
         return redirect("dashboard")
     
     if request.method == "POST":
-        email = request.POST.get("username")  # form field is named "username"
+        email = request.POST.get("username")  
         password = request.POST.get("password")
         
         if not email or not password:
             messages.error(request, "Please enter both email and password.")
             return render(request, "login.html")
         
-        # Authenticate user
         user = authenticate(request, username=email, password=password)
         
         if user is not None:
             login(request, user)
             messages.success(request, f"Welcome back, {user.first_name}!")
             
-            # Redirect based on role
             if user.is_staff:
                 return redirect("admin_dashboard")
             else:
@@ -120,30 +96,17 @@ def login_view(request):
     
     return render(request, "login.html")
 
-
-# -----------------------------
-# LOGOUT
-# -----------------------------
 def logout_view(request):
     logout(request)
     messages.success(request, "You have been logged out successfully.")
     return redirect("home")
 
-
-# -----------------------------
-# USER DASHBOARD (protected)
-# -----------------------------
 @login_required
 def user_dashboard(request):
-    # Ensure non-staff users can't access admin dashboard
     if request.user.is_staff:
         return redirect("admin_dashboard")
     return render(request, "user_dashboard.html")
 
-
-# -----------------------------
-# ADMIN DASHBOARD (staff only)
-# -----------------------------
 @login_required
 def admin_dashboard(request):
     if not request.user.is_staff:
@@ -151,10 +114,6 @@ def admin_dashboard(request):
         return redirect("dashboard")
     return render(request, "admin_dashboard.html")
 
-
-# -----------------------------
-# CV GENERATOR
-# -----------------------------
 @login_required
 def generate_cv(request):
     if request.method == "POST":
@@ -228,18 +187,9 @@ def generate_cv(request):
 
     return render(request, "generate_cv.html")
 
-
-# -----------------------------
-# CONTACT PAGE
-# -----------------------------
 def contact(request):
     return render(request, "contact.html")
 
-# Add these functions to your existing core/views.py
-
-# -----------------------------
-# MANAGE USERS (Admin only)
-# -----------------------------
 @login_required
 def manage_users(request):
     if not request.user.is_staff:
@@ -247,7 +197,7 @@ def manage_users(request):
         return redirect("dashboard")
     
     # Get all users
-    all_users = User.objects.all()
+    all_users = User.objects.all().order_by('-date_joined')
     
     # Get user count by type
     total_users = User.objects.count()
@@ -260,12 +210,8 @@ def manage_users(request):
         'admin_users': admin_users,
         'micro_workers': micro_workers,
     }
-    return render(request, "admin/manage_users.html", context)
+    return render(request, "manage_users.html", context)  # CHANGED from "admin/manage_users.html"
 
-
-# -----------------------------
-# REPORTS (Admin only)
-# -----------------------------
 @login_required
 def reports(request):
     if not request.user.is_staff:
@@ -289,16 +235,12 @@ def reports(request):
         'user_growth': user_growth,
         'task_stats': task_stats,
     }
-    return render(request, "admin/reports.html", context)
+    return render(request, "reports.html", context)  # CHANGED from "admin/reports.html"
 
-
-# -----------------------------
-# ADMIN SETTINGS (Admin only)
-# -----------------------------
 @login_required
 def admin_settings(request):
     if not request.user.is_staff:
         messages.warning(request, "Access denied. Admin privileges required.")
         return redirect("dashboard")
     
-    return render(request, "admin/settings.html")
+    return render(request, "admin_settings.html")  # CHANGED from "admin/settings.html"
