@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Welcome, {{ request.user.first_name|default:request.user.username }}</h2>
+        <p class="text-muted mb-5">Here's a quick overview of your account and activities as a MicroWorker.</p>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-tasks fa-2x text-primary me-3"></i>
+                        <h5 class="mb-0 fw-bold">Available MicroTasks</h5>
+                    </div>
+                    <p class="text-muted">Browse and apply for micro-tasks to earn and build experience.</p>
+                    <a href="{% url 'tasks' %}" class="btn btn-primary rounded-pill w-100">Browse Tasks</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-book-reader fa-2x text-primary me-3"></i>
+                        <h5 class="mb-0 fw-bold">Skill Development</h5>
+                    </div>
+                    <p class="text-muted">Access tutorials, guides, and resources to improve your skills.</p>
+                    <a href="{% url 'training' %}" class="btn btn-primary rounded-pill w-100">Learn Now</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-user fa-2x text-primary me-3"></i>
+                        <h5 class="mb-0 fw-bold">MicroWorker Profile</h5>
+                    </div>
+                    <p class="text-muted">Update your profile, skills, and portfolio to attract better tasks.</p>
+                    <button class="btn btn-primary rounded-pill w-100">View Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="py-5 " style="background: #f8f9fa;">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">We’d Love to Hear From You</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">
+                Whether you have a question, feedback, partnership inquiry, or need help using Youth Micro-Work,
+                our team is always ready to support you.
+            </p>
+        </div>
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-5 mb-5">
+                <h1 class="fw-bold mb-3">Contact Us</h1>
+                <p class="text-muted">We respond within 24 hours.</p>
+
+                <div class="d-flex align-items-start my-4">
+                    <i class="fas fa-envelope fa-lg text-primary me-3"></i>
+                    <div>
+                        <h6 class="mb-1 fw-semibold">Email</h6>
+                        <p class="text-muted mb-0">support@youthmicrowork.com</p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-start my-4">
+                    <i class="fas fa-phone fa-lg text-primary me-3"></i>
+                    <div>
+                        <h6 class="mb-1 fw-semibold">Phone</h6>
+                        <p class="text-muted mb-0">+254 700 000 000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="card shadow p-4 rounded-4 border-0 bg-white">
+                    <h4 class="fw-bold mb-4">Send Us a Message</h4>
+                    <form>
+                        <div class="mb-3">
+                            <label class="fw-semibold">Name</label>
+                            <input type="text" class="form-control rounded-pill" placeholder="Enter your name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="fw-semibold">Email</label>
+                            <input type="email" class="form-control rounded-pill" placeholder="Enter your email">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="fw-semibold">Message</label>
+                            <textarea class="form-control rounded-4" rows="4" placeholder="Write your message"></textarea>
+                        </div>
+
+                        <button class="btn btn-primary rounded-pill px-4 py-2">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

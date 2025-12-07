@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Build Your CV{% endblock %}
+{% block content %}
+
+<section class="py-5 mt-5">
+    <div class="container" style="max-width: 900px;">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Create Your ATS-Friendly CV</h2>
+            <p class="text-muted">
+                Fill in your details and download a professionally formatted CV.
+            </p>
+        </div>
+
+        <div class="card shadow-lg p-4 p-md-5 rounded-4 border-0">
+            <form method="post">
+                {% csrf_token %}
+
+                <h5 class="fw-bold mb-3">Personal Information</h5>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="fw-semibold">Full Name</label>
+                        <input name="full_name" class="form-control rounded-pill" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="fw-semibold">Email</label>
+                        <input name="email" type="email" class="form-control rounded-pill" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="fw-semibold">Phone</label>
+                        <input name="phone" class="form-control rounded-pill" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="fw-semibold">Location (City, Country)</label>
+                        <input name="location" class="form-control rounded-pill">
+                    </div>
+                </div>
+
+                <h5 class="fw-bold mb-3">Professional Summary</h5>
+                <textarea name="summary" class="form-control rounded-4 mb-4" rows="4"
+                          placeholder="Write a short professional summary (2–3 sentences)" required></textarea>
+
+                <h5 class="fw-bold mb-3">Work Experience</h5>
+                <textarea name="experience" class="form-control rounded-4 mb-4" rows="5"
+                          placeholder="List your work experience with responsibilities and achievements" required></textarea>
+
+                <h5 class="fw-bold mb-3">Education</h5>
+                <textarea name="education" class="form-control rounded-4 mb-4" rows="4"
+                          placeholder="Example: Degree, School, Dates"></textarea>
+
+                <h5 class="fw-bold mb-3">Skills (comma separated)</h5>
+                <input name="skills" class="form-control rounded-pill mb-4" placeholder="Python, Teamwork, Communication" required>
+
+                <button class="btn btn-primary w-100 rounded-pill py-3 fw-bold">
+                    Generate & Download CV (PDF)
+                </button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

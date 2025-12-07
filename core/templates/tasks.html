@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Micro-Tasks - YouthMicroWork | Earn & Build Skills{% endblock %}
+
+{% block content %}
+
+<section class="tasks-hero-section py-5 py-md-6 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="pe-lg-4">
+                    <div class="d-inline-flex align-items-center px-3 px-md-4 py-2 mb-3">
+                        <span class="dot bg-primary rounded-circle me-2" style="width: 8px; height: 8px;"></span>
+                        <span class="fw-medium text-primary small">Earn While You Learn</span>
+                    </div>
+                    <h1 class="display-5 fw-bold mb-3 mb-md-4">Start Earning with Verified <span class="gradient-text">Micro-Tasks</span></h1>
+                    <p class="lead text-muted mb-4 fs-5">
+                        Choose from hundreds of digital tasks matched to your skills. Earn instantly via M-Pesa while building your professional portfolio.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-3 gap-md-4 mt-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-shield-alt text-success fs-5"></i>
+                            <span class="small">100% Verified Opportunities</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-bolt text-warning fs-5"></i>
+                            <span class="small">Instant M-Pesa Payments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    <div class="card border-0 shadow-lg overflow-hidden rounded-3 rounded-md-4">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                             alt="Youth completing digital tasks on devices" 
+                             class="img-fluid w-100">
+                        <div class="card-img-overlay d-flex flex-column justify-content-end p-3 p-md-4" 
+                             style="background: linear-gradient(transparent 40%, rgba(0,0,0,0.5))">
+                            <div class="text-white">
+                                <h5 class="fw-bold mb-1 mb-md-2 fs-6 fs-md-5">Complete Tasks, Build Your Future</h5>
+                                <p class="small mb-0 opacity-75 d-none d-md-block">Start with zero experience required</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="filter-section py-4 bg-white border-bottom">
+    <div class="container">
+        <div class="row g-3 align-items-center">
+            <div class="col-lg-3">
+                <h3 class="h5 fw-bold mb-0">Available Tasks</h3>
+                <p class="text-muted small mb-0 d-none d-lg-block">{{ task_list|length }} opportunities</p>
+            </div>
+            <div class="col-lg-9">
+                <div class="d-flex flex-column flex-md-row gap-3">
+                    <div class="flex-grow-1">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" class="form-control border-start-0" placeholder="Search tasks by skill or keyword...">
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <div class="dropdown flex-grow-1 flex-md-grow-0">
+                            <button class="btn btn-outline-secondary w-100 w-md-auto dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-filter me-2"></i>Filter
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">All Tasks</a></li>
+                                <li><a class="dropdown-item" href="#">Quick Tasks (< 30 min)</a></li>
+                                <li><a class="dropdown-item" href="#">High Paying</a></li>
+                                <li><a class="dropdown-item" href="#">Beginner Friendly</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown flex-grow-1 flex-md-grow-0">
+                            <button class="btn btn-outline-secondary w-100 w-md-auto dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-sort me-2"></i>Sort
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Newest First</a></li>
+                                <li><a class="dropdown-item" href="#">Highest Paying</a></li>
+                                <li><a class="dropdown-item" href="#">Quickest to Complete</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="tasks-section py-5 py-md-6">
+    <div class="container">
+        {% if task_list %}
+        <div class="row g-4">
+            {% for task in task_list %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card task-card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-header bg-transparent border-0 pt-4 px-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <span class="badge text-primary px-3 py-1 rounded-pill fw-medium mb-2">
+                                    {% cycle "Data Entry" "Content Creation" "Social Media" "Research" "Translation" "Design" %}
+                                </span>
+                                <h5 class="fw-bold mb-2">{{ task }}</h5>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold text-success fs-5">KES {% cycle "500" "750" "1,000" "1,500" "2,000" "2,500" %}</div>
+                                <div class="text-muted small">Estimated Earnings</div>
+                            </div>
+                        </div>
+                        
+                        <div class="task-meta mb-3">
+                            <div class="d-flex flex-wrap gap-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fas fa-clock text-muted"></i>
+                                    <span class="small">{% cycle "30-45 min" "1-2 hours" "45-60 min" "2-3 hours" "1 hour" "3-4 hours" %}</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fas fa-signal text-muted"></i>
+                                    <span class="small">{% cycle "Beginner" "Intermediate" "Beginner" "Intermediate" "Beginner" "Advanced" %}</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fas fa-users text-muted"></i>
+                                    <span class="small">{% cycle "15" "8" "22" "6" "18" "4" %} spots left</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body pt-0 px-4">
+                        <p class="text-muted mb-4">
+                            Complete {{ task }} tasks to earn rewards, gain practical experience, and enhance your professional portfolio.
+                        </p>
+                        <div class="skills-section mb-4">
+                            <h6 class="fw-bold mb-2 small">Skills You'll Develop:</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-light text-dark border px-3 py-1 small">{% cycle "Attention to Detail" "Writing" "Social Media" "Research" "Language" "Creativity" %}</span>
+                                <span class="badge bg-light text-dark border px-3 py-1 small">{% cycle "Data Management" "Content Strategy" "Engagement" "Analysis" "Communication" "Design Thinking" %}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer bg-transparent border-0 px-4 pb-4">
+                        <div class="d-flex gap-2">
+                            <a href="#" class="btn btn-primary rounded-pill flex-grow-1">
+                                <i class="fas fa-play-circle me-2"></i>
+                                Start Task Now
+                            </a>
+                            <button class="btn btn-outline-secondary rounded-pill px-3" title="Save for later">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <a href="#" class="text-primary small text-decoration-none">
+                                <i class="fas fa-info-circle me-1"></i>
+                                View task details & requirements
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-lg-6 mx-auto text-center py-5 py-md-6">
+                <i class="fas fa-tasks fa-4x text-muted opacity-25 mb-4"></i>
+                <h3 class="fw-bold mb-3">No Tasks Available at the Moment</h3>
+                <p class="text-muted mb-4">
+                    New tasks are added regularly. Check back soon or complete your profile to get personalized task recommendations.
+                </p>
+                <a href="{% url 'training' %}" class="btn btn-primary btn-lg px-4 py-3 rounded-pill">
+                    <i class="fas fa-graduation-cap me-2"></i>
+                    Build Skills While Waiting
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="cta-section py-5 py-md-6 bg-light">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-3">Ready to Start Earning?</h2>
+        <p class="lead mb-4 opacity-75">
+            Join thousands of Kenyan youth who are already building their futures through micro-tasks.
+            No experience required - we provide all the training you need.
+        </p>
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg px-5 py-3 rounded-pill fw-bold">
+                <i class="fas fa-user-plus me-2"></i>
+                Start Earning
+            </a>
+            <a href="{% url 'training' %}" class="btn btn-outline-primary btn-lg px-5 py-3 rounded-pill border-2">
+                <i class="fas fa-graduation-cap me-2"></i>
+                Build Skills First
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .tasks-hero-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    }
+
+    .task-card {
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .task-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    }
+
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08) !important;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .category-card:hover {
+        border-color: #2563eb !important;
+    }
+</style>
+
+{% endblock %}

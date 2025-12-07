@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Admin Dashboard</h2>
+        <p class="text-muted mb-5">Manage users, tasks, reports, and site settings from here.</p>
+
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-users fa-2x text-primary me-3"></i>
+                        <h5 class="mb-0 fw-bold">Users</h5>
+                    </div>
+                    <p class="text-muted">View, edit, or deactivate user accounts.</p>
+                    <a href="{% url 'manage_users' %}" class="btn btn-primary rounded-pill w-100">Manage Users</a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-tasks fa-2x text-primary me-3"></i>
+                        <h5 class="mb-0 fw-bold">Tasks</h5>
+                    </div>
+                    <p class="text-muted">Monitor and manage all tasks assigned to users.</p>
+                    <a href="{% url 'tasks' %}" class="btn btn-primary rounded-pill w-100">View Tasks</a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-chart-line fa-2x text-primary me-3"></i>
+                        <h5 class="mb-0 fw-bold">Reports</h5>
+                    </div>
+                    <p class="text-muted">Generate and review system analytics and reports.</p>
+                    <a href="{% url 'reports' %}" class="btn btn-primary rounded-pill w-100">View Reports</a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-cogs fa-2x text-primary me-3"></i>
+                        <h5 class="mb-0 fw-bold">Settings</h5>
+                    </div>
+                    <p class="text-muted">Configure system preferences and manage admin settings.</p>
+                    <a href="{% url 'admin_settings' %}" class="btn btn-primary rounded-pill w-100">Go to Settings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
